@@ -14,7 +14,7 @@ namespace gsantillanS5
 {
     public partial class MainPage : ContentPage
     {
-        private String url = "http://192.168.20.16/ws_uisrael/post.php";
+        private String url = "http://192.168.17.26/ws_uisrael/post.php";
         private HttpClient cliente = new HttpClient();
         private ObservableCollection<Estudiante> post;
         public MainPage()

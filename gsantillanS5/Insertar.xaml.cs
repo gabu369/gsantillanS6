@@ -13,7 +13,7 @@ namespace gsantillanS5
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Insertar : ContentPage
 	{
-        private String url = "http://192.168.20.16/ws_uisrael/post.php";
+        private String url = "http://192.168.17.26/ws_uisrael/post.php";
         public Insertar ()
 		{
 			InitializeComponent ();
@@ -30,18 +30,21 @@ namespace gsantillanS5
                 parametros.Add("apellido", txtApellido.Text);
                 parametros.Add("edad", txtEdad.Text);
                 cliente.UploadValues(url, "POST", parametros);
-                DisplayAlert("Alerta","Dato insertado","Cerrar");
+                var mensaje = "Estudiante insertado con exito.";
+                DependencyService.Get<Mensaje>().longAlert(mensaje);
+                //DisplayAlert("Alerta","Dato insertado","Cerrar");
                 Navigation.PushAsync(new MainPage());
             }
             catch (Exception ex)
             {
-                DisplayAlert("Alerta",ex.ToString(),"Cerrar");
+                //DisplayAlert("Alerta",ex.ToString(),"Cerrar");
+                DependencyService.Get<Mensaje>().longAlert(ex.ToString());
             }
         }
 
         private void btnCancelar_Clicked(object sender, EventArgs e)
         {
-
+            Navigation.PushAsync(new MainPage());
         }
     }
 }

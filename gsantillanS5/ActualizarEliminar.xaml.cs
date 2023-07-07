@@ -14,7 +14,7 @@ namespace gsantillanS5
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ActualizarEliminar : ContentPage
 	{
-        private String url = "http://192.168.20.16/ws_uisrael/post.php";
+        private String url = "http://192.168.17.26/ws_uisrael/post.php";
 
         public ActualizarEliminar (int codigo, string nombre, string apellido, int edad)
 		{
@@ -36,12 +36,15 @@ namespace gsantillanS5
                 parametros.Add("apellido", txtApellido.Text);
                 parametros.Add("edad", txtEdad.Text);
                 cliente.UploadValues(url+ "?codigo="+txtCodigo.Text+ "&nombre="+txtNombre.Text+ "&apellido="+txtApellido.Text+ "&edad="+txtEdad.Text, "PUT", parametros);
-                DisplayAlert("Alerta", "Dato actualizado", "Cerrar");
+                var mensaje = "Estudiante actualizado con exito.";
+                DependencyService.Get<Mensaje>().longAlert(mensaje);
+                //DisplayAlert("Alerta", "Dato actualizado", "Cerrar");
                 Navigation.PushAsync(new MainPage());
             }
             catch (Exception ex)
             {
-                DisplayAlert("Alerta", ex.ToString(), "Cerrar");
+                //DisplayAlert("Alerta", ex.ToString(), "Cerrar");
+                DependencyService.Get<Mensaje>().longAlert(ex.ToString());
             }
         }
         private void btnEliminar_Clicked(object sender, EventArgs e)
@@ -52,12 +55,15 @@ namespace gsantillanS5
                 var parametros = new System.Collections.Specialized.NameValueCollection();
                 parametros.Add("codigo", txtCodigo.Text);
                 cliente.UploadValues(url+ "?codigo="+txtCodigo.Text, "DELETE",parametros);
-                DisplayAlert("Alerta", "Dato eliminado", "Cerrar");
+                //DisplayAlert("Alerta", "Dato eliminado", "Cerrar");
+                var mensaje = "Estudiante eliminado con exito.";
+                DependencyService.Get<Mensaje>().longAlert(mensaje);
                 Navigation.PushAsync(new MainPage());
             }
             catch (Exception ex)
             {
-                DisplayAlert("Alerta", ex.ToString(), "Cerrar");
+                //DisplayAlert("Alerta", ex.ToString(), "Cerrar");
+                DependencyService.Get<Mensaje>().longAlert(ex.ToString());
             }
         }
     }
